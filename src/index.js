@@ -2,6 +2,7 @@ import './css/styles.css';
 import getRefs from './js/get-refs';
 import API from './js/fetchCountries';
 import countryCardTpl from './templates/country.hbs';
+import countryList from './templates/country-list.hbs';
 import debounce from 'lodash.debounce';
 import { error, notice } from '@pnotify/core';
 import '@pnotify/core/dist/BrightTheme.css';
@@ -39,7 +40,7 @@ function renderCountryMarkup(countries) {
   };
 
   if (countries.length === 1) {
-    refs.list.insertAdjacentHTML('afterbegin', countryCardTpl(countries[0]));
+    refs.card.insertAdjacentHTML('afterbegin', countryCardTpl(countries[0]));
   };
 
   if (countries.length > 1 && countries.length < 10) {
@@ -55,6 +56,7 @@ function clearMarkup() {
 function createListCountriesMarkup(countries) {
   const countriesList = countries.map(country => `<li>${country.name}</li>`).join('');
   return (refs.list.innerHTML = countriesList);
+  // refs.card.insertAdjacentHTML('afterbegin', countryList);
 };
 
 function onFetchError() {
